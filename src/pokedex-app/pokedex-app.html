@@ -1,0 +1,44 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+                         
+
+
+<link rel="import" href="../components/login-component.html">
+<link rel="import" href="../components/card-product.html">
+<link rel="import" href="../components/list-movements.html">
+
+
+<dom-module id="pokedex-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>PRODUCT</h2>
+    <login-component></login-component>
+
+    <card-product></card-product>
+    <list-movements></list-movements>
+    
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class PokedexApp extends Polymer.Element {
+      static get is() { return 'pokedex-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'pokedex-app'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(PokedexApp.is, PokedexApp);
+  </script>
+</dom-module>

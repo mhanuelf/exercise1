@@ -1,0 +1,130 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="login-component">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+
+        
+
+
+<paper-dialog id="logindialog"  opened="true"> 
+    <h2>Login</h2>
+    <paper-input label="Username" value="{{username}}"></paper-input>
+    <paper-input label="Password" value="{{password}}"></paper-input>
+    
+    
+    <div class="buttons">
+        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-confirm autofocus on-click="realizarlogin">Login</paper-button>
+      </div>
+</paper-dialog>
+
+
+<iron-ajax id="tsecservice"
+		url="https://artichoke.platform.bbva.com/TechArchitecture/co/grantingTicket/V02"
+        method="POST"
+        handle-as="json"
+        content-type="application/json"
+        body=  '[
+        "authentication": {
+            "userID": "{{username}}",
+            "consumerID": "10000033",
+            "authenticationType": "02",
+            "authenticationData": [{
+                "idAuthenticationData": "password",
+                "authenticationData": ["{{password}}"]
+            }]
+        },
+        "backendUserRequest": {
+            "userId": "",
+            "accessCode": "{{username}}",
+            "dialogId": ""
+        }
+    ]'
+        last-response="{{tsecresponse}}"
+        
+      
+        
+	>
+    </iron-ajax>
+    
+   <p>{{tsecresponse}}</p>
+    </template>
+
+    <script>
+        /**
+         * `login-component` Description
+         *
+         * @summary ShortDescription.
+         * @customElement
+         * @polymer
+         * @extends {Polymer.Element}
+         */
+        class LoginComponent extends Polymer.Element {
+            /**
+             * String providing the tag name to register the element under.
+             */
+            static get is() {
+                return 'login-component';
+            }
+
+            /**
+             * Object describing property-related metadata used by Polymer features
+             */
+            static get properties() {
+                return {
+                    username : {
+                        type:String,
+                        value: 'CEDULA_CIUDADANIA0031223377'
+                        },
+                    password : {
+                        type: String,
+                        value:'88888888'
+                    },
+                    tsecresponse :{
+                        type: Object
+                    },
+                    body:{
+                        type: String,
+                        value: [{foo: this.username}]
+                
+              }
+            }
+
+            }
+            /**
+             * Instance of the element is created/upgraded. Use: initializing state,
+             * set up event listeners, create shadow dom.
+             * @constructor
+             */
+            constructor() {
+                super();
+            }
+
+            /**
+             * Use for one-time configuration of your component after local DOM is initialized. 
+             */
+            ready() {
+                super.ready();
+
+               
+            }
+
+            realizarlogin(){
+
+                this.$.tsecservice.generateRequest();
+            }
+
+        }
+
+        window.customElements.define(LoginComponent.is, LoginComponent);
+    </script>
+</dom-module>

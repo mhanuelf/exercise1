@@ -1,0 +1,93 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+
+<dom-module id="add-movement">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+
+        
+
+
+<paper-input label="Tipo movimiento" value="{{movimiento.tipo}}"></paper-input>
+<paper-input label="Valor movimiento" value="{{movimiento.monto}}"></paper-input>
+
+<button on-click="agregarMovimiento">Agregar</button>
+
+
+    </template>
+
+    <script>
+        /**
+         * `add-pokemon` Description
+         *
+         * @summary ShortDescription.
+         * @customElement
+         * @polymer
+         * @extends {Polymer.Element}
+         */
+        class AddMovement extends Polymer.Element {
+            /**
+             * String providing the tag name to register the element under.
+             */
+            static get is() {
+                return 'add-movement';
+            }
+
+            /**
+             * Object describing property-related metadata used by Polymer features
+             */
+            static get properties() {
+                return {
+
+                    movimiento: {
+            type: Object,
+            value: function() {
+              return {
+                tipo: 'debito',
+                monto: '10000'
+              }
+            }
+          }
+                }
+            }
+
+            /**
+             * Instance of the element is created/upgraded. Use: initializing state,
+             * set up event listeners, create shadow dom.
+             * @constructor
+             */
+            constructor() {
+                super();
+            }
+
+            /**
+             * Use for one-time configuration of your component after local DOM is initialized. 
+             */
+            ready() {
+                super.ready();
+
+                Polymer.RenderStatus.afterNextRender(this, function() {
+                    
+                });
+            }
+
+            agregarMovimiento() {
+                this.dispatchEvent(new CustomEvent('add-mov', {
+                detail: {
+                  id: this.movimiento
+                 }
+        }))
+      }
+
+         
+
+        }
+
+        window.customElements.define(AddMovement.is, AddMovement);
+    </script>
+</dom-module>

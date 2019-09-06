@@ -1,0 +1,92 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/paper-card/paper-card.html">
+
+<dom-module id="card-product">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+
+        
+
+<paper-card heading="Producto" image="{{image}}" elevation="1" animated-shadow="false">
+  <div class="card-content">
+      <p>Product type: {{producttype}}</p>
+      <p>Product amount: {{amount}}</p>
+      <p>Product number: {{number}}</p>
+  </div>
+  <div class="card-actions">
+    
+  </div>
+</paper-card>
+
+    </template>
+
+    <script>
+        /**
+         * `card-product.html` Description
+         *
+         * @summary ShortDescription.
+         * @customElement
+         * @polymer
+         * @extends {Polymer.Element}
+         */
+        class CardProduct extends Polymer.Element {
+            /**
+             * String providing the tag name to register the element under.
+             */
+            static get is() {
+                return 'card-product';
+            }
+
+            /**
+             * Object describing property-related metadata used by Polymer features
+             */
+            static get properties() {
+                return {
+                    producttype:{
+                        type:String,
+                        value:'Credit card'
+
+                    },
+                    number:{
+                        type: Number,
+                        value:'7765456456'
+                    },
+                    amount:{
+                        type: Number,
+                        value:1100000
+                    },
+                    image:{
+                        type: String,
+                        value:''
+
+                    }
+                };
+            }
+
+            /**
+             * Instance of the element is created/upgraded. Use: initializing state,
+             * set up event listeners, create shadow dom.
+             * @constructor
+             */
+            constructor() {
+                super();
+            }
+
+            /**
+             * Use for one-time configuration of your component after local DOM is initialized. 
+             */
+            ready() {
+                super.ready();
+
+               
+            }
+
+        }
+
+        window.customElements.define(CardProduct.is, CardProduct);
+    </script>
+</dom-module>

@@ -1,0 +1,100 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../components/add-movement.html">
+<dom-module id="list-movements">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+
+<template is="dom-repeat" items="[[listmovements]]">
+    
+        Type ="[[item.movimiento]]"
+        <p></p>
+        Value="[[item.movimiento]]"
+        <p></p>
+    
+</template>
+
+<add-movement on-add-mov="movimientoagregado" ></add-movement>
+        
+
+    </template>
+
+    <script>
+        /**
+         * `list
+        -movements` Description
+         *
+         * @summary ShortDescription.
+         * @customElement
+         * @polymer
+         * @extends {Polymer.Element}
+         */
+        class ListMovements extends Polymer.Element {
+            /**
+             * String providing the tag name to register the element under.
+             */
+            static get is() {
+                return 'list-movements';
+            }
+
+            /**
+             * Object describing property-related metadata used by Polymer features
+             */
+            static get properties() {
+                return {
+                    listmovements:{
+                        type: Array,
+                        value: function(){
+                            return {
+                                movimiento:{
+                                    type: Object,
+                                    value: function() {
+                                        return {
+                                            tipo: 'debito',
+                                            monto: '10000'
+                                        }
+                                    }
+                                }
+                                
+                    }
+                        }
+                    }
+                    
+                };
+            }
+
+            /**
+             * Instance of the element is created/upgraded. Use: initializing state,
+             * set up event listeners, create shadow dom.
+             * @constructor
+             */
+            constructor() {
+                super();
+            }
+
+            /**
+             * Use for one-time configuration of your component after local DOM is initialized. 
+             */
+            ready() {
+                super.ready();
+
+                Polymer.RenderStatus.afterNextRender(this, function() {
+                    
+                });
+            }
+
+            movimientoagregado(e){
+
+                console.log('Padre notificado del movimiento agregado',e.detail.id);
+                this.push('listmovements',this.e.detail.id);
+            }
+
+        }
+
+        window.customElements.define(ListMovements.is, ListMovements);
+    </script>
+</dom-module>
